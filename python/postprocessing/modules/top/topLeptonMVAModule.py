@@ -1,13 +1,11 @@
-# run with command:
-# python scripts/nano_postproc.py outDir /eos/cms/store/user/jingyan/LFV_Inclusive_Trilep/2016_TTH_UL/ttHToNonbb_M125_TuneCP5_13TeV-powheg-pythia8/crab_Inclusive_Trilep_2016_TTH_UL/230331_075911/0000/tree_11.root -I PhysicsTools.NanoAODTools.postprocessing.examples.topLeptonMVAModule topLeptonMVA2016 --bi scripts/keep_and_drop.txt --bo scripts/keep_and_drop.txt
-
-
 from PhysicsTools.NanoAODTools.postprocessing.framework.datamodel import Collection
 from PhysicsTools.NanoAODTools.postprocessing.framework.eventloop import Module
-import ROOT
+
+from math import log, isnan, sqrt, pi
 import xgboost as xgb
 import numpy as np
-from math import log, isnan, sqrt, pi
+import ROOT
+import os
 
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
@@ -43,8 +41,8 @@ class TopLeptonMVAProducer(Module):
         self.WPs = {"v1": [0.20, 0.41, 0.64, 0.81],
                     "v2": [0.59, 0.81, 0.90, 0.94]}
 
-        directory = "data/mvaWeights/"
         # Load electron weights
+        directory = os.environ["CMSSW_BASE"] + "/src/PhysicsTools/NanoAODTools/data/mvaWeights/"
         self.bst_el = {}
         self.bst_mu = {}
         if "v1" in self.versions:
@@ -89,28 +87,33 @@ class TopLeptonMVAProducer(Module):
             results["muonWPs_" + v] = []
 
         jets = Collection(event, "Jet")
-        dRmin = 0.4
         minJetPt = 25
 
         electrons = Collection(event, "Electron")
         for electron in electrons:
-            electron_jetPtRatio = 1 / (electron.jetRelIso + 1)
+            electron_jetPtRatio = min(1 / (electron.jetRelIso + 1), 1.5)
 
-            # closest jet
+            # Closest jet
+            dRmin = 0.4
             electron_jetBTag = 0
             for j in jets:
                 j_isNominal = j.pt > minJetPt
-                if not j_isNominal: continue # compute topLeptonMVA from jets that satisfy the nominal pt cut
+                if not j_isNominal: continue # Compute topLeptonMVA from jets that satisfy the nominal pt cut
                 deta = j.eta - electron.eta
-                dphi = deltaPhi(j.phi, electron.phi) # deltaPhi has to be between -pi and +pi
+                dphi = deltaPhi(j.phi, electron.phi)
                 dR = sqrt(deta * deta + dphi * dphi)
                 if dR < dRmin:
                     dRmin = dR
                     electron_jetBTag = j.btagDeepFlavB
 
+            electron_dxy = electron.dxy
+            if electron_dxy != 0: electron_dxy = log(abs(electron.dxy))
+            electron_dz = electron.dz
+            if electron_dz != 0: electron_dz = log(abs(electron.dz))
+
             features = np.array([[
                 electron.pt,
-                electron.eta,
+                abs(electron.eta),
                 electron.jetNDauCharged,
                 electron.miniPFRelIso_chg,
                 electron.miniPFRelIso_all - electron.miniPFRelIso_chg,
@@ -119,8 +122,8 @@ class TopLeptonMVAProducer(Module):
                 electron.pfRelIso03_all,
                 electron_jetBTag,
                 electron.sip3d,
-                log(abs(electron.dxy)),
-                log(abs(electron.dz)),
+                electron_dxy,
+                electron_dz,
                 electron.mvaFall17V2noIso,
                 electron.lostHits,
             ]])
@@ -137,23 +140,29 @@ class TopLeptonMVAProducer(Module):
 
         muons = Collection(event, "Muon")
         for muon in muons:
-            muon_jetPtRatio = 1 / (muon.jetRelIso + 1)
+            muon_jetPtRatio = min(1 / (muon.jetRelIso + 1), 1.5)
 
-            # closest jet
+            # Closest jet
+            dRmin = 0.4
             muon_jetBTag = 0
             for j in jets:
                 j_isNominal = j.pt > minJetPt
-                if not j_isNominal: continue # compute topLeptonMVA from jets that satisfy the nominal pt cut
+                if not j_isNominal: continue # Compute topLeptonMVA from jets that satisfy the nominal pt cut
                 deta = j.eta - muon.eta
-                dphi = deltaPhi(j.phi, muon.phi) # deltaPhi has to be between -pi and +pi
+                dphi = deltaPhi(j.phi, muon.phi)
                 dR = sqrt(deta * deta + dphi * dphi)
                 if dR < dRmin:
                     dRmin = dR
                     muon_jetBTag = j.btagDeepFlavB
 
+            muon_dxy = muon.dxy
+            if muon_dxy != 0: muon_dxy = log(abs(muon.dxy))
+            muon_dz = muon.dz
+            if muon_dz != 0: muon_dz = log(abs(muon.dz))
+
             features = np.array([[
                 muon.pt,
-                muon.eta,
+                abs(muon.eta),
                 muon.jetNDauCharged,
                 muon.miniPFRelIso_chg,
                 muon.miniPFRelIso_all - muon.miniPFRelIso_chg,
@@ -162,8 +171,8 @@ class TopLeptonMVAProducer(Module):
                 muon.pfRelIso03_all,
                 muon_jetBTag,
                 muon.sip3d,
-                log(abs(muon.dxy)),
-                log(abs(muon.dz)),
+                muon_dxy,
+                muon_dz,
                 muon.segmentComp,
             ]])
 
@@ -191,6 +200,6 @@ def getLeptonMVAProducer(year):
 
 
 topLeptonMVA2016 = getLeptonMVAProducer("UL2016")
-# topLeptonMVA2016APV = getLeptonMVAProducer("UL2016_preVFP")
-# topLeptonMVA2017 = getLeptonMVAProducer("UL2017")
-# topLeptonMVA2018 = getLeptonMVAProducer("UL2018")
+topLeptonMVA2016APV = getLeptonMVAProducer("UL2016_preVFP")
+topLeptonMVA2017 = getLeptonMVAProducer("UL2017")
+topLeptonMVA2018 = getLeptonMVAProducer("UL2018")
