@@ -41,8 +41,8 @@ class TopLeptonMVAProducer(Module):
         self.WPs = {"v1": [0.20, 0.41, 0.64, 0.81],
                     "v2": [0.59, 0.81, 0.90, 0.94]}
 
-        # Load electron weights
         directory = os.environ["CMSSW_BASE"] + "/src/PhysicsTools/NanoAODTools/data/mvaWeights/"
+        # Load electron weights
         self.bst_el = {}
         self.bst_mu = {}
         if "v1" in self.versions:
@@ -87,29 +87,18 @@ class TopLeptonMVAProducer(Module):
             results["muonWPs_" + v] = []
 
         jets = Collection(event, "Jet")
-        minJetPt = 25
 
         electrons = Collection(event, "Electron")
         for electron in electrons:
             electron_jetPtRatio = min(1 / (electron.jetRelIso + 1), 1.5)
 
-            # Closest jet
-            dRmin = 0.4
             electron_jetBTag = 0
-            for j in jets:
-                j_isNominal = j.pt > minJetPt
-                if not j_isNominal: continue # Compute topLeptonMVA from jets that satisfy the nominal pt cut
-                deta = j.eta - electron.eta
-                dphi = deltaPhi(j.phi, electron.phi)
-                dR = sqrt(deta * deta + dphi * dphi)
-                if dR < dRmin:
-                    dRmin = dR
-                    electron_jetBTag = j.btagDeepFlavB
+            jetIdx = electron.jetIdx
+            if jetIdx >= 0 and jetIdx < len(jets): electron_jetBTag = jets[jetIdx].btagDeepFlavB
+            if electron_jetBTag < 0: electron_jetBTag = 0
 
-            electron_dxy = electron.dxy
-            if electron_dxy != 0: electron_dxy = log(abs(electron.dxy))
-            electron_dz = electron.dz
-            if electron_dz != 0: electron_dz = log(abs(electron.dz))
+            electron_dxy = 0 if (electron.dxy == 0) else log(abs(electron.dxy))
+            electron_dz = 0 if (electron.dz == 0) else log(abs(electron.dz))
 
             features = np.array([[
                 electron.pt,
@@ -142,23 +131,13 @@ class TopLeptonMVAProducer(Module):
         for muon in muons:
             muon_jetPtRatio = min(1 / (muon.jetRelIso + 1), 1.5)
 
-            # Closest jet
-            dRmin = 0.4
             muon_jetBTag = 0
-            for j in jets:
-                j_isNominal = j.pt > minJetPt
-                if not j_isNominal: continue # Compute topLeptonMVA from jets that satisfy the nominal pt cut
-                deta = j.eta - muon.eta
-                dphi = deltaPhi(j.phi, muon.phi)
-                dR = sqrt(deta * deta + dphi * dphi)
-                if dR < dRmin:
-                    dRmin = dR
-                    muon_jetBTag = j.btagDeepFlavB
+            jetIdx = muon.jetIdx
+            if jetIdx >= 0 and jetIdx < len(jets): muon_jetBTag = jets[jetIdx].btagDeepFlavB
+            if muon_jetBTag < 0: muon_jetBTag = 0
 
-            muon_dxy = muon.dxy
-            if muon_dxy != 0: muon_dxy = log(abs(muon.dxy))
-            muon_dz = muon.dz
-            if muon_dz != 0: muon_dz = log(abs(muon.dz))
+            muon_dxy = 0 if (muon.dxy == 0) else log(abs(muon.dxy))
+            muon_dz = 0 if (muon.dz == 0) else log(abs(muon.dz))
 
             features = np.array([[
                 muon.pt,
