@@ -10,19 +10,6 @@ import os
 ROOT.PyConfig.IgnoreCommandLineOptions = True
 
 
-def deltaPhi(phi1, phi2, returnAbs = True):
-    if isnan(phi1) or isnan(phi2): return float('nan')
-    dphi = phi2 - phi1
-    if dphi > pi:
-        dphi -= 2.0 * pi
-    if dphi <= -pi:
-        dphi += 2.0 * pi
-    if returnAbs:
-        return abs(dphi)
-    else:
-        return dphi
-
-
 class TopLeptonMVAProducer(Module):
     def __init__(self, year, versions = ["v1", "v2"]):
         yearstring = "UL18"
@@ -113,12 +100,12 @@ class TopLeptonMVAProducer(Module):
                 electron.sip3d,
                 electron_dxy,
                 electron_dz,
-                electron.mvaFall17V2noIso,
-                electron.lostHits,
+                electron.mvaFall17V2noIso
             ]])
 
-            dtest = xgb.DMatrix(features)
             for v in self.versions:
+                features_v = [np.append(features, electron.lostHits)] if (v == "v2") else features
+                dtest = xgb.DMatrix(features_v)
                 mvaScore = self.bst_el[v].predict(dtest)[0]
                 WP = 0
                 for wp in self.WPs[v]:
@@ -152,7 +139,7 @@ class TopLeptonMVAProducer(Module):
                 muon.sip3d,
                 muon_dxy,
                 muon_dz,
-                muon.segmentComp,
+                muon.segmentComp
             ]])
 
             dtest = xgb.DMatrix(features)
