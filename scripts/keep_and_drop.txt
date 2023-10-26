@@ -1,6 +1,10 @@
-# this is a comment
-#keep *
-drop *
-keep Muon*
-keep Electron*
-keep Jet*
+# drop *
+# keep Electron*
+# keep Muon*
+# keep Tau*
+# keep Jet*
+# keep MET*
+# keep GenPart*
+# keep GenJet*
+# keep n*
+keep *
