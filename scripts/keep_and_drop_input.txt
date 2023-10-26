@@ -1,5 +1,3 @@
 # this is a comment
 drop *
-keep Muon*
-keep Electron*
-keep Jet*
+keep Generator_weight

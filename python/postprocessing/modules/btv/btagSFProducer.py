@@ -131,6 +131,24 @@ class btagSFProducer(Module):
                     },
                     'supported_wp': ["L", "M", "T", "shape_corr"]
                 },
+                'UL2016_preVFP': {
+                    'inputFileName': "2016APVreshaping_deepJet.csv",
+                    'measurement_types': {
+                        0: "comb",  # b
+                        1: "comb",  # c
+                        2: "incl"   # light
+                    },
+                    'supported_wp': ["shape_corr"]
+                },
+                'UL2016': {
+                    'inputFileName': "2016reshaping_deepJet.csv",
+                    'measurement_types': {
+                        0: "comb",  # b
+                        1: "comb",  # c
+                        2: "incl"   # light
+                    },
+                    'supported_wp': ["shape_corr"]
+                },
                 '2017': {
                     'inputFileName': "DeepFlavour_94XSF_V3_B_F.csv",
                     'measurement_types': {
@@ -141,13 +159,13 @@ class btagSFProducer(Module):
                     'supported_wp': ["L", "M", "T", "shape_corr"]
                 },
                 'UL2017': {
-                    'inputFileName': "DeepJet_106XUL17SF.csv",
+                    'inputFileName': "2017reshaping_deepJet.csv",
                     'measurement_types': {
                         0: "comb",  # b
                         1: "comb",  # c
                         2: "incl"   # light
                     },
-                    'supported_wp': ["L", "M", "T", "shape_corr"]
+                    'supported_wp': ["shape_corr"]
                 },
                 '2018': {
                     'inputFileName': "DeepJet_102XSF_V1.csv",
@@ -159,13 +177,13 @@ class btagSFProducer(Module):
                     'supported_wp': ["L", "M", "T", "shape_corr"]
                 },
                 'UL2018': {
-                    'inputFileName': "DeepJet_106XUL18SF.csv",
+                    'inputFileName': "2018reshaping_deepJet.csv",
                     'measurement_types': {
                         0: "comb",  # b
                         1: "comb",  # c
                         2: "incl"   # light
                     },
-                    'supported_wp': ["L", "M", "T", "shape_corr"]
+                    'supported_wp': ["shape_corr"]
                 },
             },
             'cmva': {
@@ -379,6 +397,9 @@ class btagSFProducer(Module):
 
 # define modules using the syntax 'name = lambda : constructor' to avoid having them loaded when not needed
 
-
+btagSFUL2016APV = lambda: btagSFProducer('UL2016_preVFP', 'deepjet', ['shape_corr'], "2016APVreshaping_deepJet.csv", 0, ["jes"])
+btagSFUL2016 = lambda: btagSFProducer('UL2016', 'deepjet', ['shape_corr'], "2016reshaping_deepJet.csv", 0, ["jes"])
+btagSFUL2017 = lambda: btagSFProducer('UL2017', 'deepjet', ['shape_corr'], "2017reshaping_deepJet.csv", 0, ["jes"])
+btagSFUL2018 = lambda: btagSFProducer('UL2018', 'deepjet', ['shape_corr'], "2018reshaping_deepJet.csv", 0, ["jes"])
 btagSF2016 = lambda: btagSFProducer("2016")
 btagSF2017 = lambda: btagSFProducer("2017")
