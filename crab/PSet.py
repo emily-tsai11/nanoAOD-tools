@@ -4,14 +4,14 @@
 import FWCore.ParameterSet.Config as cms
 process = cms.Process('NANO')
 process.source = cms.Source(
-    "PoolSource",
+    'PoolSource',
     fileNames=cms.untracked.vstring(),
-    # lumisToProcess=cms.untracked.VLuminosityBlockRange("254231:1-254231:24")
+    # lumisToProcess=cms.untracked.VLuminosityBlockRange('254231:1-254231:24')
 )
 process.source.fileNames = [
-    '../../NanoAOD/test/lzma.root'  # you can change only this line
+    '/eos/cms/store/data/Run2016H/SingleMuon/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/120000/61FC1E38-F75C-6B44-AD19-A9894155874E.root' # you can change only this line!!
 ]
 process.maxEvents = cms.untracked.PSet(input=cms.untracked.int32(10))
-process.output = cms.OutputModule("PoolOutputModule",
+process.output = cms.OutputModule('PoolOutputModule',
                                   fileName=cms.untracked.string('tree.root'))
 process.out = cms.EndPath(process.output)
