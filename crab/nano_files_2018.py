@@ -9,8 +9,8 @@ mc2018_samples = {}
 # data2018_samples['DYM10to50'] = ['address', 'data/mc', 'dataset', 'year', 'run', 'cross section', 'lumi', 'Neventsraw']
 
 # scalar interaction
-mc2018_samples['2018_LFVStScalarU_UL'] = [['/eos/user/e/etsai/workspace/MCProduction/2018_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2018', '', '0.417', '59.83', '100000', 1]
-mc2018_samples['2018_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/workspace/MCProduction/2018_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2018', '', '0.012', '59.83', '100000', 1]
+# mc2018_samples['2018_LFVStScalarU_UL'] = [['/eos/user/e/etsai/public/LFV_Signal/2018_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2018', '', '0.417', '59.83', '100000', 1]
+# mc2018_samples['2018_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/LFV_Signal/2018_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2018', '', '0.012', '59.83', '100000', 1]
 
 # background samples
 # mc2018_samples['2018_DY10to50_UL'] = [['/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL18NanoAODv9-106X_upgrade2018_realistic_v16_L1v1-v1/NANOAODSIM'], 'mc', '', '2018', '', '18610', '59.83', '67981236']

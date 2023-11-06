@@ -9,8 +9,8 @@ mc2016APV_samples = {}
 # data2016APV_samples['DYM10to50'] = ['address', 'data/mc', 'dataset', 'year', 'run', 'cross section', 'lumi', 'Neventsraw']
 
 # scalar interaction
-# mc2016APV_samples['2016APV_LFVStScalarU_UL'] = [['/eos/user/e/etsai/workspace/MCProduction/2016APV_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2016APV', '', '0.417', '19.50', '100000', 1]
-# mc2016APV_samples['2016APV_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/workspace/MCProduction/2016APV_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2016APV', '', '0.012', '19.50', '100000', 1]
+# mc2016APV_samples['2016APV_LFVStScalarU_UL'] = [['/eos/user/e/etsai/public/LFV_Signal/2016APV_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2016APV', '', '0.417', '19.50', '100000', 1]
+# mc2016APV_samples['2016APV_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/LFV_Signal/2016APV_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2016APV', '', '0.012', '19.50', '100000', 1]
 
 # background samples
 # mc2016APV_samples['2016APV_DY10to50_UL'] = [['/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODAPVv9-106X_mcRun2_asymptotic_preVFP_v11-v1/NANOAODSIM'], 'mc', '', '2016APV', '', '18610', '19.50', '67981236']
@@ -58,7 +58,7 @@ mc2016APV_samples = {}
 # data2016APV_samples['2016APV_E_SingleElectron'] = [['/SingleElectron/Run2016E-HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleElectron', '2016APV', 'E', '1', '1', '1']
 # data2016APV_samples['2016APV_F_SingleElectron'] = [['/SingleElectron/Run2016F-HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleElectron', '2016APV', 'F', '1', '1', '1']
 
-data2016APV_samples['2016APV_Bv1_SingleMuon'] = [['/SingleMuon/Run2016B-ver1_HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleMuon', '2016APV', 'B', '1', '1', '1']
+# data2016APV_samples['2016APV_Bv1_SingleMuon'] = [['/SingleMuon/Run2016B-ver1_HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleMuon', '2016APV', 'B', '1', '1', '1']
 # data2016APV_samples['2016APV_Bv2_SingleMuon'] = [['/SingleMuon/Run2016B-ver2_HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleMuon', '2016APV', 'B', '1', '1', '1']
 # data2016APV_samples['2016APV_C_SingleMuon'] = [['/SingleMuon/Run2016C-HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleMuon', '2016APV', 'C', '1', '1', '1']
 # data2016APV_samples['2016APV_D_SingleMuon'] = [['/SingleMuon/Run2016D-HIPM_UL2016_MiniAODv2_NanoAODv9-v2/NANOAOD'], 'data', 'SingleMuon', '2016APV', 'D', '1', '1', '1']

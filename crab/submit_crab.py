@@ -24,6 +24,8 @@ parser.add_argument('--y', dest='YEAR', default='2016')
 # dictionary (e.g. '2017_LFVStVecC' or '2017_ST_atW'), it will run only the
 # selected dataset
 parser.add_argument('--s', dest='SELECTED', default=None)
+# you can set the name of the crab directory
+parser.add_argument('--f', dest='DIRECTORY', default='CRABtasks')
 
 # do NOT set below options, they will be set for you for each dataset
 parser.add_argument('--e', dest='ERA', default=None)
@@ -54,10 +56,10 @@ if ARGS.YEAR == '2018':
 
 # if we want to change this then we should make it an ARG so we can edit name
 # in the script below
-dirname = 'CRABtasks_final'
+dirname = ARGS.DIRECTORY
 
 os.system('mkdir ' + dirname)
-print('Making CRABtasks directory to store CRAB submit scripts')
+print('Making ' + dirname + ' directory to store CRAB submit scripts')
 published = True
 
 SUBMIT_SCRIPT = '''#!/usr/bin/env python
@@ -161,7 +163,7 @@ from CRABClient.UserUtilities import config
 config = Configuration()
 
 idname = '{SELECTED}'
-dirname = 'CRABtasks'
+dirname = '{DIRECTORY}'
 
 config.section_('General')
 config.General.requestName = '%s_%s' % ('{DATE}', idname)
@@ -172,9 +174,9 @@ config.JobType.psetName = 'PSet.py'
 config.JobType.scriptExe = 'crab_script_%s.sh' % (idname)
 # hadd nano will not be needed once nano tools are in cmssw
 config.JobType.inputFiles = ['crab_script_%s.py' % (idname), '../../scripts/haddnano.py']
-config.JobType.sendPythonFolder = True
+# config.JobType.sendPythonFolder = True
 config.JobType.allowUndistributedCMSSW = True
-config.JobType.maxJobRuntimeMin = 150
+# config.JobType.maxJobRuntimeMin = 240
 '''
 
     if not published:
@@ -201,10 +203,12 @@ config.JobType.maxJobRuntimeMin = 150
 filelist = {DATASET}
 # for l in jobsLines:
 #     filelist.append(str(l[:-1]))
-#print filelist
+# print filelist
 config.Data.userInputFiles = filelist
+# config.Data.splitting = 'EventBased'
+# config.Data.unitsPerJob = 10000
 config.Data.splitting = 'FileBased'
-config.Data.unitsPerJob = 1
+config.Data.unitsPerJob = 10
 '''
 
     if published:
@@ -239,7 +243,8 @@ config.Site.storageSite = 'T2_CH_CERN'
     # make the runPostProcessor.py script
     CRAB_SCRIPT0 = '#!/usr/bin/env python'
 
-    CRAB_SCRIPT1 = CRAB_SCRIPT0 + '''import os
+    CRAB_SCRIPT1 = CRAB_SCRIPT0 + '''
+import os
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import *
 
 # this takes care of converting the input files from CRAB
@@ -355,7 +360,7 @@ print('You have successfully created CRAB submit scripts =D')
 print('Now you need to submit your jobs')
 print('Get a grid proxy by doing: ')
 print('    voms-proxy-init --voms cms')
-print('Then cd to the CRABtasks directory and run: ')
+print('Then cd to the ' + dirname + ' directory and run: ')
 print('    python crab_submitter.py')
 print('That script contains commands to run all of the scripts you just created...')
 
@@ -370,8 +375,8 @@ for aid in ids:
     ARGS.ID = aid
     # idname%s = '%s'
     subCommand = '''print('Checking CRAB job status for dataset: %s')
-subprocess.call('crab status -d ./crab_{DATE}_%s', shell=True)
-subprocess.call('echo "crab status -d ./crab_{DATE}_%s"', shell=True)
+subprocess.call('crab status --verboseErrors -d ./crab_{DATE}_%s', shell=True)
+subprocess.call('echo "crab status --verboseErrors -d ./crab_{DATE}_%s"', shell=True)
 
 # print('As you submit CRAB jobs REMOVE THESE FILES to prevent your space from filling: ')
 

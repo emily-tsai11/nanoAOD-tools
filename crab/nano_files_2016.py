@@ -9,8 +9,8 @@ mc2016_samples = {}
 # data2016_samples['DYM10to50'] = ['address', 'data/mc', 'dataset', 'year', 'run', 'cross section', 'lumi', 'Neventsraw']
 
 # scalar interaction
-# mc2016_samples['2016_LFVStScalarU_UL'] = [['/eos/user/e/etsai/workspace/MCProduction/2016_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2016', '', '0.417', '16.81', '100000', 1]
-# mc2016_samples['2016_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/workspace/MCProduction/2016_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2016', '', '0.012', '16.81', '100000', 1]
+# mc2016_samples['2016_LFVStScalarU_UL'] = [['/eos/user/e/etsai/public/LFV_Signal/2016_SMEFTsim_ST_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVStScalarU', '2016', '', '0.417', '16.81', '100000', 1]
+# mc2016_samples['2016_LFVTtScalarU_UL'] = [['/eos/cms/store/user/etsai/LFV_Signal/2016_SMEFTsim_TT_clequ1_lltu/root_NanoAOD/'], 'mc', 'LFVTtScalarU', '2016', '', '0.012', '16.81', '100000', 1]
 
 # background samples
 # mc2016_samples['2016_DY10to50_UL'] = [['/DYJetsToLL_M-10to50_TuneCP5_13TeV-madgraphMLM-pythia8/RunIISummer20UL16NanoAODv9-106X_mcRun2_asymptotic_v17-v1/NANOAODSIM'], 'mc', '', '2016', '', '18610', '16.81', '67981236']
@@ -48,4 +48,4 @@ mc2016_samples = {}
 
 # data2016_samples['2016_F_SingleMuon'] = [['/SingleMuon/Run2016F-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'], 'data', 'SingleMuon', '2016', 'F', '1', '1', '1']
 # data2016_samples['2016_G_SingleMuon'] = [['/SingleMuon/Run2016G-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'], 'data', 'SingleMuon', '2016', 'G', '1', '1', '1']
-data2016_samples['2016_H_SingleMuon'] = [['/SingleMuon/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'], 'data', 'SingleMuon', '2016', 'H', '1', '1', '1']
+# data2016_samples['2016_H_SingleMuon'] = [['/SingleMuon/Run2016H-UL2016_MiniAODv2_NanoAODv9-v1/NANOAOD'], 'data', 'SingleMuon', '2016', 'H', '1', '1', '1']

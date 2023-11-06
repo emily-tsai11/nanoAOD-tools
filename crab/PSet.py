@@ -9,7 +9,7 @@ process.source = cms.Source(
     # lumisToProcess=cms.untracked.VLuminosityBlockRange('254231:1-254231:24')
 )
 process.source.fileNames = [
-    '/eos/cms/store/data/Run2016H/SingleMuon/NANOAOD/UL2016_MiniAODv2_NanoAODv9-v1/120000/61FC1E38-F75C-6B44-AD19-A9894155874E.root' # you can change only this line!!
+    'root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL16NanoAODAPVv9/ttHJetToNonbb_M125_TuneCP5_13TeV_amcatnloFXFX_madspin_pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v11-v1/2530000/18B3F965-03D8-9C4B-87CA-426B884BF8DA.root' # you can change only this line!!
 ]
 process.maxEvents = cms.untracked.PSet(input=cms.untracked.int32(10))
 process.output = cms.OutputModule('PoolOutputModule',
