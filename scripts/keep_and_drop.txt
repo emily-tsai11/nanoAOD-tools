@@ -1,3 +1,15 @@
-this is a comment
 drop *
+keep nElectron
+keep nMuon
+keep nTau
+keep nJet
+keep Electron*
+keep Muon*
+keep Tau*
+keep Jet*
+keep MET*
+keep Flag*
+keep HLT*
 keep Generator_weight
+keep Pileup_nTrueInt
+keep L1PreFiringWeight*
