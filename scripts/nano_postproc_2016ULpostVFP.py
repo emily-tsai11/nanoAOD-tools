@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+# python nano_postproc_2016ULpostVFP.py . ../../NanoAOD/test/2016postVFP_MC.root
+
 import os
 from PhysicsTools.NanoAODTools.postprocessing.framework.postprocessor import *
 
