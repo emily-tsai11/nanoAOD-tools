@@ -10,6 +10,7 @@ keep Jet*
 keep MET*
 keep Flag*
 keep HLT*
+keep GenJet_pt
 keep GenPart_pdgId
 keep Generator_weight
 keep Pileup_nTrueInt
