@@ -100,7 +100,7 @@ class TopLeptonMVAProducer(Module):
                 electron.sip3d,
                 electron_dxy,
                 electron_dz,
-                electron.mvaFall17V2noIso
+                electron.mvaNoIso
             ]])
 
             for v in self.versions:

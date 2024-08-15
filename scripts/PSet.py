@@ -9,7 +9,11 @@ process.source = cms.Source(
     # lumisToProcess=cms.untracked.VLuminosityBlockRange('254231:1-254231:24')
 )
 process.source.fileNames = [
-    'root://cms-xrd-global.cern.ch//store/mc/RunIISummer20UL16NanoAODAPVv9/ttHJetToNonbb_M125_TuneCP5_13TeV_amcatnloFXFX_madspin_pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v11-v1/2530000/18B3F965-03D8-9C4B-87CA-426B884BF8DA.root' # you can change only this line!!
+    # you can change only this line!!
+    'file:/eos/home-e/etsai/workspace/TopLFV_ReNano_CMSSW_13_2_2/src/PhysicsTools/NanoAOD/test/2016postVFP_TTTo2L2Nu.root'
+    # 'file:/eos/home-e/etsai/workspace/TopLFV_ReNano_CMSSW_13_2_2/src/PhysicsTools/NanoAOD/test/2016postVFP_TTToSemiLeptonic.root'
+    # 'file:/eos/home-e/etsai/workspace/TopLFV_ReNano_CMSSW_13_2_2/src/PhysicsTools/NanoAOD/test/2016postVFP_TTW.root'
+    # 'file:/eos/home-e/etsai/workspace/TopLFV_ReNano_CMSSW_13_2_2/src/PhysicsTools/NanoAOD/test/2016postVFP_DYM50.root'
 ]
 process.maxEvents = cms.untracked.PSet(input=cms.untracked.int32(10))
 process.output = cms.OutputModule('PoolOutputModule',

@@ -112,7 +112,7 @@ class fatJetUncertaintiesProducer(Module):
                 self.doGroomed = False
         else:
             raise ValueError("ERROR: Invalid jet type = '%s'!" % jetType)
-        self.rhoBranchName = "fixedGridRhoFastjetAll"
+        self.rhoBranchName = "Rho_fixedGridRhoFastjetAll"
         self.lenVar = "n" + self.jetBranchName
 
         # jet mass scale

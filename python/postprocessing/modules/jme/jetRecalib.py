@@ -25,7 +25,7 @@ class jetRecalib(Module):
             self.subJetBranchName = "SubJet"
         else:
             raise ValueError("ERROR: Invalid jet type = '%s'!" % jetType)
-        self.rhoBranchName = "fixedGridRhoFastjetAll"
+        self.rhoBranchName = "Rho_fixedGridRhoFastjetAll"
         self.lenVar = "n" + self.jetBranchName
 
         self.jesInputArchivePath = os.environ['CMSSW_BASE'] + \
